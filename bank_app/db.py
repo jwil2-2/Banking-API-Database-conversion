@@ -6,6 +6,7 @@ MONGO_URI = "mongodb://localhost:27017"  # or Atlas connection string / env var
 client = AsyncIOMotorClient(MONGO_URI)
 db = client["bank_app"]
 
+#tables in mongoDB to be filled in
 users_collection = db["users"]
 accounts_collection = db["accounts"]
 transactions_collection = db["transactions"]

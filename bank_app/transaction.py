@@ -21,19 +21,24 @@ class Transaction:
     def getAmount(self):
         return self.__amount
     
+    #method for encapsulation and returning associated account id for transaction
     def getAccountId(self):
         return self.__accountId
 
+    #method for encapsulation and returning transaction id
     def getTransactionId(self):
         return self.__transactionId
 
+    #method for encapsulation and setting transaction id
     def setTransactionId(self, transaction_id):
         # called once, after Mongo assigns the real _id on insert
         self.__transactionId = transaction_id
 
+    #method for encapsulation and get timestamp for transaction creation
     def getCreatedAt(self):
         return self.__createdAt
     
+    #method to convert transaction object into storable text object for mongoDb
     def to_dict(self) -> dict:
         return {
             "account_id": self.__accountId,
@@ -42,6 +47,7 @@ class Transaction:
             "created_at": self.__createdAt,
         }
 
+    #method for conversion of mongoDb text object back to transaction object
     @classmethod
     def from_dict(cls, dc: dict) -> "Transaction":
         return cls(

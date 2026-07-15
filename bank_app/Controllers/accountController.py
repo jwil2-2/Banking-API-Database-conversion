@@ -11,22 +11,25 @@ _accountService = AccountService(_accountRepository)
 # Class that actually creates and calls API endpoints which initiates CRUD
 class AccountController:
 
+    #helper for account data layout on response
     class AccountOut(BaseModel):
         id: str
         account_type: str
         user_id: str
         balance: Decimal
     
+    #helper for account creation
     class CreateAccountRequest(BaseModel):
         account_type: str = Field(pattern="^(Checking|Savings)$")
 
+    #initialization of Account service to use
     def __init__(self, service: AccountService):
         self.service = service
 
     #setup of app api
     #app = FastAPI()
 
-    # Api to read and list all accounts back to server
+    # Api to read and list all of users banking accounts 
     @router.get("", response_model=list[AccountOut])
     async def listAccounts(userId: str):
         # TEMPORARY: once login/JWT exists, replace `user_id: str` query param
@@ -42,6 +45,7 @@ class AccountController:
             for a in accounts
         ]
     
+    # Api to create new banking account for user
     @router.post("", response_model=AccountOut, status_code=201)
     async def create_account(payload: CreateAccountRequest, user_id: str):
     # TEMPORARY: user_id as a query param until auth exists (see list_accounts note)
