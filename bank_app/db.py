@@ -1,9 +1,14 @@
 from motor.motor_asyncio import AsyncIOMotorClient
+import os
+from dotenv import load_dotenv
 
-MONGO_URI = "mongodb://localhost:27017"  # or Atlas connection string / env var
-#remeber to add this to a .env file instead of being hardcoded in
+# Load the variables from the .env file
+load_dotenv()
 
-client = AsyncIOMotorClient(MONGO_URI)
+#get url from .env file
+mongo_uri = os.getenv("MONGO_URI")  
+
+client = AsyncIOMotorClient(mongo_uri)
 db = client["bank_app"]
 
 #tables in mongoDB to be filled in
