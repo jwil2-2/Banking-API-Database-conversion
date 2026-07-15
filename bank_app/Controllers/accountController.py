@@ -11,14 +11,14 @@ _accountService = AccountService(_accountRepository)
 # Class that actually creates and calls API endpoints which initiates CRUD
 class AccountController:
 
-    #helper for account data layout on response
+    #class that defines and validates response data when client creates, fetches or updates account data
     class AccountOut(BaseModel):
         id: str
         account_type: str
         user_id: str
         balance: Decimal
     
-    #helper for account creation
+    #class that defines and validates when client sends request to create new account
     class CreateAccountRequest(BaseModel):
         account_type: str = Field(pattern="^(Checking|Savings)$")
 
