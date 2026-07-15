@@ -124,7 +124,7 @@ async def main() -> None:
             if account == None :
                 raise ReferenceError("No account created")
             #getting transactions from current account, also making sure user profile is made
-            #(wip) transactions = await _transactionRepository.get_by_account(account.getAccountId())
+            #(need to implement) transactions = await _transactionRepository.get_by_account(account.getAccountId())
             transactions: Transaction = account.getTransactions()
 
             print("Transactions from current account: \n")
